@@ -1,12 +1,20 @@
 import React from 'react';
+import FiltersActivated from '../../components/common/FiltersActivated';
+import FiltersSection from '../../components/common/FiltersSection/Filters';
 import Header from '../../components/common/Header';
-import ContainerPage from './styles';
+import { ContainerPage, MainContent } from './styles';
 
 function Home() {
   return (
-    <ContainerPage>
+    <>
       <Header />
-    </ContainerPage>    
+      <ContainerPage>            
+        <FiltersSection />
+        <MainContent>
+          <FiltersActivated />
+        </MainContent>
+      </ContainerPage>    
+    </>
   )
 }
 
