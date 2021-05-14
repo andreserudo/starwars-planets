@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../../components/common/Header';
+import ContainerPage from './styles';
 
 function Home() {
   return (
-    <h1>Home</h1>
+    <ContainerPage>
+      <Header />
+    </ContainerPage>    
   )
 }
 
