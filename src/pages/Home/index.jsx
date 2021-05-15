@@ -4,7 +4,7 @@ import FiltersSection from '../../components/common/FiltersSection/Filters';
 import Header from '../../components/common/Header';
 import { ContainerPage, MainContent } from './styles';
 
-function Home() {
+function Home() {  
   return (
     <>
       <Header />
