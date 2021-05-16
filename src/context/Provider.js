@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PlanetsContext from './PlanetsContext';
@@ -13,9 +14,16 @@ const defaultFilters = {
     }
   };
 
+const defaultFilterType = 
+  ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+const defaultFilterQuantity =
+ ['maior que', 'menor que', 'igual a'];
+
 function Provider({children}) {  
   const [data, setData] = useState([]);
   const [dataFilters, setFilters] = useState(defaultFilters);
+  const [filterType, setFilterType] = useState(defaultFilterType.sort());
+  const [filterQuantity, setFilterQuantity] = useState(defaultFilterQuantity.sort());
   const {ERROR, LOADING, SUCCESS} = requestStates;
   const [serviceStatus, setServiceStatus] = useState(LOADING);  
 
@@ -24,6 +32,43 @@ function Provider({children}) {
       delete item.residents;      
       return item;
     })
+  }
+
+  const handleRemoveFilter = (filter) => {    
+    const newColums = [...filterType, filter.column];
+    const newComparisons = [...filterQuantity, filter.comparison];
+    const orderedTypes = newColums.sort();
+    const newFilterByNumericValues = dataFilters.filters.filterByNumericValues
+      .filter( item => item.column !== filter.column);
+
+    console.log(newFilterByNumericValues);
+    setFilterType([...orderedTypes]);
+    setFilterQuantity([...newComparisons.sort()])
+
+    setFilters((prevState) => ({
+      filters: {
+        ...prevState.filters,
+        filterByNumericValues: [...newFilterByNumericValues]
+      }
+    }));
+    
+  }
+
+  const handleAddNumericFilter = (filter) => {    
+    const quantityToRemove = filter.column;
+    const comparisonToRemove = filter.comparison;
+    const newColumns = filterType.filter(filter => filter !== quantityToRemove);
+    const newComparisons = filterQuantity.filter(filter => filter !== comparisonToRemove);
+
+    setFilters((prevState) => ({
+      filters: {
+        ...prevState.filters,
+        filterByNumericValues: [...prevState.filters.filterByNumericValues, filter]
+      }
+    }));
+    
+    setFilterType([...newColumns]);
+    setFilterQuantity([...newComparisons]);
   }
 
   const handleFilterNameChange = ({target}) => {
@@ -74,7 +119,11 @@ function Provider({children}) {
     data,
     serviceStatus,
     dataFilters,
-    handleFilterNameChange
+    handleFilterNameChange,
+    filterType,
+    filterQuantity,
+    handleAddNumericFilter,
+    handleRemoveFilter
   };
 
   return (
