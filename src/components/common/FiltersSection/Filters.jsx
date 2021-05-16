@@ -8,7 +8,14 @@ function FiltersSection() {
 
   return (
     <FilterContainer>
-      <input  onChange={(event) => handleFilterNameChange(event)}/>
+      <label htmlFor="planetName">
+        Nome:
+        <input 
+          id="planetName"
+          onChange={(event) => handleFilterNameChange(event)}
+          placeholder="Digite aqui..."
+        />
+      </label>
       <FormFilters />
     </FilterContainer>
   )

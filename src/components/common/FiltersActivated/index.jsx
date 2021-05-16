@@ -11,7 +11,7 @@ function FiltersActivated() {
     <FiltersActivatedWrapper>
       { filterByNumericValues.length > 0
       &&
-        filterByNumericValues.map((filter) => <FilterCard key={filter} filter={filter} />)
+        filterByNumericValues.map((filter) => <FilterCard key={filter.column} filter={filter} />)
       }
     </FiltersActivatedWrapper>
   )
