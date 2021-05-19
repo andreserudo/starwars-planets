@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import handleDateFormat from "../utils/handleDateFormat";
-import data from './sample';
+// import data from './sample';
 const endpoint = 'https://swapi-trybe.herokuapp.com/api/planets/';
 
 const requestStates = {
@@ -36,7 +35,8 @@ const getAllPlanetsAPI = async () => {
   try {
     const request = await fetch(endpoint).catch(error => error);
     const response = await request.json();   
-    const planets = handleInternalLinks(response);
+
+    const planets = handleInternalLinks(response.results);
     
     return planets;
   } catch (error) {

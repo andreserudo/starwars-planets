@@ -9,6 +9,10 @@ const FilterContainer = styled.section`
   padding-left: 2rem;
   padding-right: 2rem;
   padding-bottom: 2rem;
+
+  label {
+    color: white;
+  }
 `
 
 export default FilterContainer;
