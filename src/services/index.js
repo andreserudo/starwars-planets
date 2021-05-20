@@ -12,7 +12,7 @@ const getFilmNameAPI = async (url) => {
   try {
     const request = await fetch(url);
     const response = await request.json();
-    //console.log('responseNo', String(response.title));
+
     return response.title;
   } catch (error) {
     return null;
@@ -23,8 +23,6 @@ const handleInternalLinks = (arrayOfPlanets) => {
   arrayOfPlanets.forEach( planet => {
     let createdDate = new Date(planet.created);
     let editedDate= new Date(planet.edited);      
-
-    
 
     planet.created = handleDateFormat(createdDate);
     planet.edited = handleDateFormat(editedDate);

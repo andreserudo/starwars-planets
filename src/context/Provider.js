@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PlanetsContext from './PlanetsContext';
@@ -41,8 +40,7 @@ function Provider({children}) {
     const orderedTypes = newColums.sort();
     const newFilterByNumericValues = dataFilters.filters.filterByNumericValues
       .filter( item => item.column !== filter.column);
-
-    console.log(newFilterByNumericValues);
+    
     setFilterType([...orderedTypes]);
     setFilterQuantity([...newComparisons.sort()])
 
@@ -89,8 +87,7 @@ function Provider({children}) {
     if (response === null) {      
       setServiceStatus(ERROR);
       return ;
-    }else{
-      console.log('veio aqui');
+    }else{      
       const planetsWithLinks = removeResidents([...response]);
       const aux = [...Object.values(planetsWithLinks)];
       
@@ -106,12 +103,10 @@ function Provider({children}) {
   };  
 
   const applyNumericFilters = () => {    
-    const { filterByNumericValues } = dataFilters.filters;
-    console.log('mno apply', data);
+    const { filterByNumericValues } = dataFilters.filters;    
     let planetsData = [...data];
     let planetsFiltered = [];
-    console.log(filterByNumericValues);
-    console.log(planetsData);
+
     filterByNumericValues.forEach(element => {
       if (element.comparison === 'maior que') {
         planetsFiltered = planetsData
@@ -132,27 +127,14 @@ function Provider({children}) {
     setDataWithFilter(planetsFiltered);
   }
 
-  const applyReloadBeforeTextFilter = async () => {
-    const { filterByNumericValues } = dataFilters.filters;
-    console.log('foi de base');
-    await handleRequestPlanetsAPI();
-    if(filterByNumericValues.length > 0) {
-      applyNumericFilters();
-      return ;
-    }
-    console.log('na saida', data);
-  }
-
   useEffect(() => {
     handleRequestPlanetsAPI();    
   },[]);
 
-  useEffect(() => {
-    console.log('1');
+  useEffect(() => {    
     const { filterByName, filterByNumericValues } = dataFilters.filters;
     const { name } = filterByName;
-    if(name !== '') {
-      console.log('texto1');
+    if(name !== '') {      
       const newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
       setDataWithFilter(newData);
     } else {
@@ -162,8 +144,7 @@ function Provider({children}) {
     }
   }, [dataFilters.filters.filterByName]);
 
-  useEffect(() => {
-    console.log('2');
+  useEffect(() => {    
     const { filterByNumericValues } = dataFilters.filters;
     if (filterByNumericValues.length === 0) {
       handleRequestPlanetsAPI();
@@ -171,12 +152,6 @@ function Provider({children}) {
       applyNumericFilters();
     }
   }, [dataFilters.filters.filterByNumericValues]);
-
-  // useEffect(() => {
-  //   if(dataFilters.filters.filterByNumericValues.length > 0) {
-  //     applyNumericFilters()
-  //   }
-  // }, [dataFilters]);
 
   const context = {
     data,
