@@ -122,7 +122,7 @@ function Provider({children}) {
       }
       planetsData = [...planetsFiltered];        
     });
-    console.log(planetsFiltered);
+
     setDataWithFilter(planetsFiltered);
   }
 
