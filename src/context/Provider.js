@@ -91,8 +91,7 @@ function Provider({children}) {
       const planetsWithLinks = removeResidents([...response]);
       const aux = [...Object.values(planetsWithLinks)];
       
-      updateData(aux);
-      setDataWithFilter(aux);
+      updateData(aux);      
       setServiceStatus(SUCCESS);
     }
   }
@@ -123,7 +122,7 @@ function Provider({children}) {
       }
       planetsData = [...planetsFiltered];        
     });
-
+    console.log(planetsFiltered);
     setDataWithFilter(planetsFiltered);
   }
 

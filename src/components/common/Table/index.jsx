@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../../../context/PlanetsContext';
 
 function Table() {  
-  const { data, dataWithFilter } = useContext(PlanetsContext);
+  const { data, dataWithFilter, dataFilters } = useContext(PlanetsContext);
+  const { filterByNumericValues, filterByName } = dataFilters.filters;
   let columnNames;
   if(data.length > 0) {
     columnNames = Object.keys(data[0]);
   }
 
-  if(dataWithFilter.length > 0) {
+  if ((filterByNumericValues.length > 0) || (filterByName.name !== '')) {
+    console.log('aqui', dataWithFilter);
     return (
       <>
         { dataWithFilter.length > 0 ?
