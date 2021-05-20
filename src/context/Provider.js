@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PlanetsContext from './PlanetsContext';
@@ -21,6 +20,7 @@ const defaultFilterQuantity =
 
 function Provider({children}) {  
   const [data, setData] = useState([]);
+  const [dataWithFilter, setDataWithFilter] = useState([]);
   const [dataFilters, setFilters] = useState(defaultFilters);
   const [filterType, setFilterType] = useState(defaultFilterType.sort());
   const [filterQuantity, setFilterQuantity] = useState(defaultFilterQuantity.sort());
@@ -40,8 +40,7 @@ function Provider({children}) {
     const orderedTypes = newColums.sort();
     const newFilterByNumericValues = dataFilters.filters.filterByNumericValues
       .filter( item => item.column !== filter.column);
-
-    console.log(newFilterByNumericValues);
+    
     setFilterType([...orderedTypes]);
     setFilterQuantity([...newComparisons.sort()])
 
@@ -88,35 +87,75 @@ function Provider({children}) {
     if (response === null) {      
       setServiceStatus(ERROR);
       return ;
-    }else{
+    }else{      
       const planetsWithLinks = removeResidents([...response]);
       const aux = [...Object.values(planetsWithLinks)];
-
-      setData(aux);      
+      
+      updateData(aux);
+      setDataWithFilter(aux);
       setServiceStatus(SUCCESS);
     }
+  }
+
+  const updateData = (newData) => {    
+    setData(newData);
+
+  };  
+
+  const applyNumericFilters = () => {    
+    const { filterByNumericValues } = dataFilters.filters;    
+    let planetsData = [...data];
+    let planetsFiltered = [];
+
+    filterByNumericValues.forEach(element => {
+      if (element.comparison === 'maior que') {
+        planetsFiltered = planetsData
+          .filter((planet) => parseInt(planet[element.column], 10) > parseInt(element.value, 10)
+           && planet[element.column] !== 'unknown');
+      } else if (element.comparison === 'menor que') {
+        planetsFiltered = planetsData
+          .filter((planet) => parseInt(planet[element.column], 10) < parseInt(element.value, 10)
+          && planet[element.column] !== 'unknown');
+      } else {
+        planetsFiltered = planetsData
+          .filter((planet) => parseInt(planet[element.column], 10) === parseInt(element.value, 10)
+           && planet[element.column] !== 'unknown');
+      }
+      planetsData = [...planetsFiltered];        
+    });
+
+    setDataWithFilter(planetsFiltered);
   }
 
   useEffect(() => {
     handleRequestPlanetsAPI();    
   },[]);
 
-  useEffect(() => {
-    const { filterByName } = dataFilters.filters;
+  useEffect(() => {    
+    const { filterByName, filterByNumericValues } = dataFilters.filters;
     const { name } = filterByName;
-    if(name !== '') {
-      const newData = data.filter(planet => planet.name.includes(name) === true);
-      setData(newData);
+    if(name !== '') {      
+      const newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
+      setDataWithFilter(newData);
     } else {
-      if(serviceStatus === requestStates.SUCCESS) {
-        // console.log('reinicia');
-        // handleRequestPlanetsAPI();
+      if(filterByNumericValues.length > 0) {
+        applyNumericFilters();
       }
     }
   }, [dataFilters.filters.filterByName]);
 
+  useEffect(() => {    
+    const { filterByNumericValues } = dataFilters.filters;
+    if (filterByNumericValues.length === 0) {
+      handleRequestPlanetsAPI();
+    } else {
+      applyNumericFilters();
+    }
+  }, [dataFilters.filters.filterByNumericValues]);
+
   const context = {
     data,
+    dataWithFilter,
     serviceStatus,
     dataFilters,
     handleFilterNameChange,

@@ -12,7 +12,7 @@ const getFilmNameAPI = async (url) => {
   try {
     const request = await fetch(url);
     const response = await request.json();
-    //console.log('responseNo', String(response.title));
+
     return response.title;
   } catch (error) {
     return null;
