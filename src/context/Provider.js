@@ -135,10 +135,10 @@ function Provider({children}) {
     const { name } = filterByName;
     if(name !== '') {
       let newData = [];
-      if(dataWithFilter.length > 0) {
-        newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
+      if(filterByNumericValues.length > 0) {
+         newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
       } else {
-        newData = data.filter(planet => planet.name.includes(name) === true);
+        newData = data.filter(planet => planet.name.includes(name) === true);      
       }
       setDataWithFilter(newData);
     } else {
