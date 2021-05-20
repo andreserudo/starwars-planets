@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# Star Wars Planets
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bem vindo ao projeto Star Wars Planet.
+Esse projeto consome um endpoint através de fetch e disponibiliza o resultado em uma tabela.
+Filtros em tela tornam possiveis a alteração da listagem em tela conforme as suas seleções.
 
-## Available Scripts
+## Começando
 
-In the project directory, you can run:
+Para rodar a aplicação em sua máquina realize os comandos:
+1. Para baixar o repositório para a sua máquina
+`git clone git@github.com:andreserudo/starwars-planets.git`
+2. Instalar as dependências (utilize o gerenciador de pacotes da sua preferência):
+`yarn install`
+3. Rode o script de start:
+`yarn start`
 
-### `yarn start`
+## O processo de desenvolvimento
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Afim de demonstrar o meu fluxo de trabalho. Todas as alterações feitas até então no projeto foram realizadas por Pull Requests.
+Acompanhe o meu desenvolvimento visualizando a aba de Pull Request e filtre por closed.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## O processo de planejamento
 
-### `yarn test`
+Não só de codar viverá um desenvolvedor, certo?
+Para desenvolver essa atividade optei por ter um processo de "acordo de layout".
+Realizei essa etapa usando o Figma, [Veja aqui o layout](https://www.figma.com/file/AygfZx4quvweHDowTJVuob/TryAndBe?node-id=0%3A1).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+E ainda assim, não quis ser só um rosto bonito.
+Precisei antes ainda de começar a ideação do layout, planejar como o desenvolvimento iria ocorrer, onde queria chegar, como eu queria aparecer e ter a resposta visual do meu progresso durante esses 7 dias. E optei em fazer isso pelo Notion, [Veja aqui o meu planejamento](https://www.notion.so/Entregas-50248aaa6b4548bc87e08e70601029e8).
 
-### `yarn build`
+## As animações
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Não detenho nenhum direito sobre as animações utilizadas.
+Todas elas foram obtidas, e estão disponiveis de forma gratuita, no [Lottie](https://lottiefiles.com/).
