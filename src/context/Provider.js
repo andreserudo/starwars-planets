@@ -91,8 +91,7 @@ function Provider({children}) {
       const planetsWithLinks = removeResidents([...response]);
       const aux = [...Object.values(planetsWithLinks)];
       
-      updateData(aux);
-      setDataWithFilter(aux);
+      updateData(aux);      
       setServiceStatus(SUCCESS);
     }
   }
@@ -134,8 +133,13 @@ function Provider({children}) {
   useEffect(() => {    
     const { filterByName, filterByNumericValues } = dataFilters.filters;
     const { name } = filterByName;
-    if(name !== '') {      
-      const newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
+    if(name !== '') {
+      let newData = [];
+      if(filterByNumericValues.length > 0) {
+         newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
+      } else {
+        newData = data.filter(planet => planet.name.includes(name) === true);      
+      }
       setDataWithFilter(newData);
     } else {
       if(filterByNumericValues.length > 0) {

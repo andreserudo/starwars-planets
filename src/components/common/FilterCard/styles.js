@@ -6,7 +6,7 @@ const FilterWrapper = styled.div`
   justify-content: space-around;
 
   border-radius: 6px;
-  padding: .2rem .5rem;
+  padding: .4rem .5rem;
 
   background-color: #C4C4C4;  
 
@@ -19,10 +19,28 @@ const FilterWrapper = styled.div`
   }
 `;
 
-const FilterTitle = styled.span`
+const FilterInfo = styled.span`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const FilterText = styled.span`
   color: white;
 `;
 
-const FilterButton = styled.button``;
+const FilterButton = styled.button`
+  margin-left: .5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: .25rem;
 
-export {FilterWrapper , FilterButton, FilterTitle};
+  &:hover{
+    opacity: .7;    
+    transition: opacity 1s;
+  }
+`;
+
+export {FilterWrapper , FilterButton, FilterInfo, FilterText};
