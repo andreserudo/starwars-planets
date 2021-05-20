@@ -4,6 +4,8 @@ Bem vindo ao projeto Star Wars Planet.
 Esse projeto consome um endpoint através de fetch e disponibiliza o resultado em uma tabela.
 Filtros em tela tornam possiveis a alteração da listagem em tela conforme as suas seleções.
 
+Você pode experimentar o projeto rodando nesse link: [aqui](https://starwars-planets.vercel.app/).
+
 ## Começando
 
 Para rodar a aplicação em sua máquina realize os comandos:
