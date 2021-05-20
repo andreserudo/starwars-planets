@@ -133,8 +133,13 @@ function Provider({children}) {
   useEffect(() => {    
     const { filterByName, filterByNumericValues } = dataFilters.filters;
     const { name } = filterByName;
-    if(name !== '') {      
-      const newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
+    if(name !== '') {
+      let newData = [];
+      if(dataWithFilter.length > 0) {
+        newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
+      } else {
+        newData = data.filter(planet => planet.name.includes(name) === true);
+      }
       setDataWithFilter(newData);
     } else {
       if(filterByNumericValues.length > 0) {
