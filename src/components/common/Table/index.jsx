@@ -9,8 +9,7 @@ function Table() {
     columnNames = Object.keys(data[0]);
   }
 
-  if ((filterByNumericValues.length > 0) || (filterByName.name !== '')) {
-    console.log('aqui', dataWithFilter);
+  if ((filterByNumericValues.length > 0) || (filterByName.name !== '')) {    
     return (
       <>
         { dataWithFilter.length > 0 ?
