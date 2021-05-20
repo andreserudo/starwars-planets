@@ -7,6 +7,7 @@ const FiltersActivatedWrapper = styled.div`
   justify-content: center;
 
   margin-top: .5rem;
+  margin-bottom: 1rem;
 `;
 
 export default FiltersActivatedWrapper;

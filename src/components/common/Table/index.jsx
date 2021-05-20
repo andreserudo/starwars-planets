@@ -42,7 +42,7 @@ function Table() {
           }
           </tbody>
         </table>
-        : <p>Nada a ser exibido</p>
+        : <p>Não foram encontrados resultados para os filtros aplicados.</p>
         }
       </>
     )
@@ -80,7 +80,7 @@ function Table() {
       }
       </tbody>
     </table>
-    : <p>Nada a ser exibido</p>
+    : <p>Não foram encontrados resultados para os filtros aplicados.</p>
     }
     </>
   )
