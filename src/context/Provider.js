@@ -21,6 +21,7 @@ const defaultFilterQuantity =
 
 function Provider({children}) {  
   const [data, setData] = useState([]);
+  const [dataWithFilter, setDataWithFilter] = useState([]);
   const [dataFilters, setFilters] = useState(defaultFilters);
   const [filterType, setFilterType] = useState(defaultFilterType.sort());
   const [filterQuantity, setFilterQuantity] = useState(defaultFilterQuantity.sort());
@@ -89,12 +90,57 @@ function Provider({children}) {
       setServiceStatus(ERROR);
       return ;
     }else{
+      console.log('veio aqui');
       const planetsWithLinks = removeResidents([...response]);
       const aux = [...Object.values(planetsWithLinks)];
-
-      setData(aux);      
+      
+      updateData(aux);
+      setDataWithFilter(aux);
       setServiceStatus(SUCCESS);
     }
+  }
+
+  const updateData = (newData) => {    
+    setData(newData);
+
+  };  
+
+  const applyNumericFilters = () => {    
+    const { filterByNumericValues } = dataFilters.filters;
+    console.log('mno apply', data);
+    let planetsData = [...data];
+    let planetsFiltered = [];
+    console.log(filterByNumericValues);
+    console.log(planetsData);
+    filterByNumericValues.forEach(element => {
+      if (element.comparison === 'maior que') {
+        planetsFiltered = planetsData
+          .filter((planet) => parseInt(planet[element.column], 10) > parseInt(element.value, 10)
+           && planet[element.column] !== 'unknown');
+      } else if (element.comparison === 'menor que') {
+        planetsFiltered = planetsData
+          .filter((planet) => parseInt(planet[element.column], 10) < parseInt(element.value, 10)
+          && planet[element.column] !== 'unknown');
+      } else {
+        planetsFiltered = planetsData
+          .filter((planet) => parseInt(planet[element.column], 10) === parseInt(element.value, 10)
+           && planet[element.column] !== 'unknown');
+      }
+      planetsData = [...planetsFiltered];        
+    });
+
+    setDataWithFilter(planetsFiltered);
+  }
+
+  const applyReloadBeforeTextFilter = async () => {
+    const { filterByNumericValues } = dataFilters.filters;
+    console.log('foi de base');
+    await handleRequestPlanetsAPI();
+    if(filterByNumericValues.length > 0) {
+      applyNumericFilters();
+      return ;
+    }
+    console.log('na saida', data);
   }
 
   useEffect(() => {
@@ -102,21 +148,39 @@ function Provider({children}) {
   },[]);
 
   useEffect(() => {
-    const { filterByName } = dataFilters.filters;
+    console.log('1');
+    const { filterByName, filterByNumericValues } = dataFilters.filters;
     const { name } = filterByName;
     if(name !== '') {
-      const newData = data.filter(planet => planet.name.includes(name) === true);
-      setData(newData);
+      console.log('texto1');
+      const newData = dataWithFilter.filter(planet => planet.name.includes(name) === true);
+      setDataWithFilter(newData);
     } else {
-      if(serviceStatus === requestStates.SUCCESS) {
-        // console.log('reinicia');
-        // handleRequestPlanetsAPI();
+      if(filterByNumericValues.length > 0) {
+        applyNumericFilters();
       }
     }
   }, [dataFilters.filters.filterByName]);
 
+  useEffect(() => {
+    console.log('2');
+    const { filterByNumericValues } = dataFilters.filters;
+    if (filterByNumericValues.length === 0) {
+      handleRequestPlanetsAPI();
+    } else {
+      applyNumericFilters();
+    }
+  }, [dataFilters.filters.filterByNumericValues]);
+
+  // useEffect(() => {
+  //   if(dataFilters.filters.filterByNumericValues.length > 0) {
+  //     applyNumericFilters()
+  //   }
+  // }, [dataFilters]);
+
   const context = {
     data,
+    dataWithFilter,
     serviceStatus,
     dataFilters,
     handleFilterNameChange,

@@ -24,6 +24,8 @@ const handleInternalLinks = (arrayOfPlanets) => {
     let createdDate = new Date(planet.created);
     let editedDate= new Date(planet.edited);      
 
+    
+
     planet.created = handleDateFormat(createdDate);
     planet.edited = handleDateFormat(editedDate);
   });
